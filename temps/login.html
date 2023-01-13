@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Login</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <style>
+      body{
+         background-color: orange;
+      }
+         .form{
+            position: absolute;
+            top: 50%;
+            width: 80%;
+            height: auto;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 13px 14px 16px 17px grey;
+            padding-bottom: 10%;
+         }
+         .lbtn{
+            margin-top: 8%;
+            width: 80%;
+            border-radius: 30px;
+            font-size: 70px;
+            color: orange;
+            
+        }
+        
+        .lbtn2{
+            margin-top: 5%;
+            width: 80%;
+            border-radius: 30px;
+            font-size: 70px;
+            color: orange;
+        }
+        
+        .img{
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+        }
+        
+        .lbtn:hover,.lbtn2:hover{
+            width: 80%;
+            transition-duration: .1s;
+            transition-property: all;
+            border-radius: 30px;
+            font-size: 70px;
+            
+         }
+   </style>
+   <body>
+      <center>
+      <img class="img" src="static/avatars/l4.png" width="1000px" height="1000px"><br>
+   </center>
+      <div class="form">
+         <form action="/" method="post">
+            {% csrf_token %}
+            <center>
+               <br>
+               <h1 style="font-size: 100px;color: orange;font-family: monospace;">Login</h1>
+               <input type="text" class="lbtn" name="un" placeholder="Username"><br>
+            <input class="lbtn2" type="password" name="ps" placeholder="Password"><br><br><br>
+            <input class="btn btn-warning" style="font-size: 50px;width: 80%;border-radius: 20px;color: aliceblue;" type="submit" value="login">
+         </center>
+         </form>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,1044 @@
+<html>
+{% load static %}
+<head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <style>
+ 
+        body{
+            background-size: cover;
+            background-repeat: repeat-y;
+            background-color: black;
+            background-image: url("{% static 'images/bg.jpg' %}");
+        }
+        .col{
+            width: 108px;
+            height: 100px;
+            /* color: deepskyblue; */
+            border:  5px solid black;
+            border-radius: 10px;
+            background-size: cover;
+            background-origin: content-box;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* font-size: 50px; */
+            /* background-image: url("{% static 'new/blue/m4.png' %}"); */
+
+        }
+        .row{
+            margin-left: 2px;
+
+        }
+        .plate{
+            margin-top: 10%;
+        }
+        .health-plate{
+            background-color: transparent;
+            width: 100%;
+            height: 200px;
+            padding-left: 2%;
+            padding-right: 2%;
+            margin-left:0.5% ;
+        }
+        .plate1{
+            background-color: tomato;
+            width: 70%;
+            height: 60px;
+            float: left;
+            margin-top: 1%;
+        }
+        .plate2{
+            background-color: tomato;
+            width: 70%;
+            height: 60px;
+            float: right;
+            margin-top: 1%;
+
+        }
+        
+        .health1{
+            background-color: white;
+            width: 100%;
+            height: 60px;
+            float: left;
+            border: 2px inset white;
+
+        }
+        .health2{
+            background-color: white;
+            width: 100%;
+            height: 60px;
+            float: right;
+            border: 2px inset white;
+        
+        }
+        .flx2{
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row-reverse;
+        }
+        
+        .flx{
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .win{
+            position: relative;
+            top: 20%;
+        }
+/* 
+        
+        .loader {
+  border: 16px solid transparent;
+  border-radius: 50%;
+  border-right: 16px solid whitesmoke;
+  width: 50%;
+  height: 28%;
+  margin-left: 25%;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin .4s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.load{
+    width: 100%;
+  margin-top: 20%;
+
+    height: 100%;
+} */
+
+.lbar{
+    font-size: 80px;
+    text-align: center;
+    background-color: white;
+}
+        .loading{
+            position: relative;
+            top: 20%;
+            left: 5%;
+            background-color: orange;
+            width: 90%;
+            height: 50%;
+            border-radius: 30px;
+        }
+        
+ </style>  
+  </head>
+  <body>
+
+    <audio id="take">
+        <source src="/static/images/take.mp3">
+    </audio>
+    <audio id="hit">
+        <source src="/static/images/hit.mp3">
+    </audio>
+
+    <div class="win">
+        <img src="/static/images/win.gif" width="100%">
+    </div>
+
+    <div class="lose">
+        <img src="/static/images/lose.gif" width="100%">
+    </div>
+
+    <h1 style="font-size: 50px;float: left;color: aliceblue;font-weight: bolder;margin-left: 5%;">Inay</h1>
+   <br><br>
+   <br>
+    <div class="health-plate">
+        <div class="flx2">
+            <div class="plate2">
+                <div class="health2">
+        
+                </div>
+            </div>
+            <div style="margin-left: 5%;width: 30%;">
+                <img src="/static/avatars/6.png" width="100%" height="100%">
+            </div>
+        </div>
+    </div>
+
+    <div class="plate">
+        <div class='row'>
+    <div class='col' id='c1' onclick='blink("#c1")' style='background-color: orange' >1</div>
+    <div class='col' id='c2' onclick='blink("#c2")' style='background-color: white' >2</div>
+    <div class='col' id='c3' onclick='blink("#c3")' style='background-color: orange' >3</div>
+    <div class='col' id='c4' onclick='blink("#c4")' style='background-color: white' >4</div>
+    <div class='col' id='c5' onclick='blink("#c5")' style='background-color: orange' >5</div>
+    <div class='col' id='c6' onclick='blink("#c6")' style='background-color: white' >6</div>
+    <div class='col' id='c7' onclick='blink("#c7")' style='background-color: orange' >7</div>
+    <div class='col' id='c8' onclick='blink("#c8")' style='background-color: white' >8</div>
+    <div class='col' id='c9' onclick='blink("#c9")' style='background-color: orange' >9</div>
+    <div class='col' id='c10' onclick='blink("#c10")' style='background-color: white' >10</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c11' onclick='blink("#c11")' style='background-color: white' >11</div>
+    <div class='col' id='c12' onclick='blink("#c12")' style='background-color: orange' >12</div>
+    <div class='col' id='c13' onclick='blink("#c13")' style='background-color: white' >13</div>
+    <div class='col' id='c14' onclick='blink("#c14")' style='background-color: orange' >14</div>
+    <div class='col' id='c15' onclick='blink("#c15")' style='background-color: white' >15</div>
+    <div class='col' id='c16' onclick='blink("#c16")' style='background-color: orange' >16</div>
+    <div class='col' id='c17' onclick='blink("#c17")' style='background-color: white' >17</div>
+    <div class='col' id='c18' onclick='blink("#c18")' style='background-color: orange' >18</div>
+    <div class='col' id='c19' onclick='blink("#c19")' style='background-color: white' >19</div>
+    <div class='col' id='c20' onclick='blink("#c20")' style='background-color: orange' >20</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c21' onclick='blink("#c21")' style='background-color: orange' >21</div>
+    <div class='col' id='c22' onclick='blink("#c22")' style='background-color: white' >22</div>
+    <div class='col' id='c23' onclick='blink("#c23")' style='background-color: orange' >23</div>
+    <div class='col' id='c24' onclick='blink("#c24")' style='background-color: white' >24</div>
+    <div class='col' id='c25' onclick='blink("#c25")' style='background-color: orange' >25</div>
+    <div class='col' id='c26' onclick='blink("#c26")' style='background-color: white' >26</div>
+    <div class='col' id='c27' onclick='blink("#c27")' style='background-color: orange' >27</div>
+    <div class='col' id='c28' onclick='blink("#c28")' style='background-color: white' >28</div>
+    <div class='col' id='c29' onclick='blink("#c29")' style='background-color: orange' >29</div>
+    <div class='col' id='c30' onclick='blink("#c30")' style='background-color: white' >30</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c31' onclick='blink("#c31")' style='background-color: white' >31</div>
+    <div class='col' id='c32' onclick='blink("#c32")' style='background-color: orange' >32</div>
+    <div class='col' id='c33' onclick='blink("#c33")' style='background-color: white' >33</div>
+    <div class='col' id='c34' onclick='blink("#c34")' style='background-color: orange' >34</div>
+    <div class='col' id='c35' onclick='blink("#c35")' style='background-color: white' >35</div>
+    <div class='col' id='c36' onclick='blink("#c36")' style='background-color: orange' >36</div>
+    <div class='col' id='c37' onclick='blink("#c37")' style='background-color: white' >37</div>
+    <div class='col' id='c38' onclick='blink("#c38")' style='background-color: orange' >38</div>
+    <div class='col' id='c39' onclick='blink("#c39")' style='background-color: white' >39</div>
+    <div class='col' id='c40' onclick='blink("#c40")' style='background-color: orange' >40</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c41' onclick='blink("#c41")' style='background-color: orange' >41</div>
+    <div class='col' id='c42' onclick='blink("#c42")' style='background-color: white' >42</div>
+    <div class='col' id='c43' onclick='blink("#c43")' style='background-color: orange' >43</div>
+    <div class='col' id='c44' onclick='blink("#c44")' style='background-color: white' >44</div>
+    <div class='col' id='c45' onclick='blink("#c45")' style='background-color: orange' >45</div>
+    <div class='col' id='c46' onclick='blink("#c46")' style='background-color: white' >46</div>
+    <div class='col' id='c47' onclick='blink("#c47")' style='background-color: orange' >47</div>
+    <div class='col' id='c48' onclick='blink("#c48")' style='background-color: white' >48</div>
+    <div class='col' id='c49' onclick='blink("#c49")' style='background-color: orange' >49</div>
+    <div class='col' id='c50' onclick='blink("#c50")' style='background-color: white' >50</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c51' onclick='blink("#c51")' style='background-color: white' >51</div>
+    <div class='col' id='c52' onclick='blink("#c52")' style='background-color: orange' >52</div>
+    <div class='col' id='c53' onclick='blink("#c53")' style='background-color: white' >53</div>
+    <div class='col' id='c54' onclick='blink("#c54")' style='background-color: orange' >54</div>
+    <div class='col' id='c55' onclick='blink("#c55")' style='background-color: white' >55</div>
+    <div class='col' id='c56' onclick='blink("#c56")' style='background-color: orange' >56</div>
+    <div class='col' id='c57' onclick='blink("#c57")' style='background-color: white' >57</div>
+    <div class='col' id='c58' onclick='blink("#c58")' style='background-color: orange' >58</div>
+    <div class='col' id='c59' onclick='blink("#c59")' style='background-color: white' >59</div>
+    <div class='col' id='c60' onclick='blink("#c60")' style='background-color: orange' >60</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c61' onclick='blink("#c61")' style='background-color: orange' >61</div>
+    <div class='col' id='c62' onclick='blink("#c62")' style='background-color: white' >62</div>
+    <div class='col' id='c63' onclick='blink("#c63")' style='background-color: orange' >63</div>
+    <div class='col' id='c64' onclick='blink("#c64")' style='background-color: white' >64</div>
+    <div class='col' id='c65' onclick='blink("#c65")' style='background-color: orange' >65</div>
+    <div class='col' id='c66' onclick='blink("#c66")' style='background-color: white' >66</div>
+    <div class='col' id='c67' onclick='blink("#c67")' style='background-color: orange' >67</div>
+    <div class='col' id='c68' onclick='blink("#c68")' style='background-color: white' >68</div>
+    <div class='col' id='c69' onclick='blink("#c69")' style='background-color: orange' >69</div>
+    <div class='col' id='c70' onclick='blink("#c70")' style='background-color: white' >70</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c71' onclick='blink("#c71")' style='background-color: white' >71</div>
+    <div class='col' id='c72' onclick='blink("#c72")' style='background-color: orange' >72</div>
+    <div class='col' id='c73' onclick='blink("#c73")' style='background-color: white' >73</div>
+    <div class='col' id='c74' onclick='blink("#c74")' style='background-color: orange' >74</div>
+    <div class='col' id='c75' onclick='blink("#c75")' style='background-color: white' >75</div>
+    <div class='col' id='c76' onclick='blink("#c76")' style='background-color: orange' >76</div>
+    <div class='col' id='c77' onclick='blink("#c77")' style='background-color: white' >77</div>
+    <div class='col' id='c78' onclick='blink("#c78")' style='background-color: orange' >78</div>
+    <div class='col' id='c79' onclick='blink("#c79")' style='background-color: white' >79</div>
+    <div class='col' id='c80' onclick='blink("#c80")' style='background-color: orange' >80</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c81' onclick='blink("#c81")' style='background-color: orange' >81</div>
+    <div class='col' id='c82' onclick='blink("#c82")' style='background-color: white' >82</div>
+    <div class='col' id='c83' onclick='blink("#c83")' style='background-color: orange' >83</div>
+    <div class='col' id='c84' onclick='blink("#c84")' style='background-color: white' >84</div>
+    <div class='col' id='c85' onclick='blink("#c85")' style='background-color: orange' >85</div>
+    <div class='col' id='c86' onclick='blink("#c86")' style='background-color: white' >86</div>
+    <div class='col' id='c87' onclick='blink("#c87")' style='background-color: orange' >87</div>
+    <div class='col' id='c88' onclick='blink("#c88")' style='background-color: white' >88</div>
+    <div class='col' id='c89' onclick='blink("#c89")' style='background-color: orange' >89</div>
+    <div class='col' id='c90' onclick='blink("#c90")' style='background-color: white' >90</div>
+    </div>
+    <div class='row'>
+    <div class='col' id='c91' onclick='blink("#c91")' style='background-color: white' >91</div>
+    <div class='col' id='c92' onclick='blink("#c92")' style='background-color: orange' >92</div>
+    <div class='col' id='c93' onclick='blink("#c93")' style='background-color: white' >93</div>
+    <div class='col' id='c94' onclick='blink("#c94")' style='background-color: orange' >94</div>
+    <div class='col' id='c95' onclick='blink("#c95")' style='background-color: white' >95</div>
+    <div class='col' id='c96' onclick='blink("#c96")' style='background-color: orange' >96</div>
+    <div class='col' id='c97' onclick='blink("#c97")' style='background-color: white' >97</div>
+    <div class='col' id='c98' onclick='blink("#c98")' style='background-color: orange' >98</div>
+    <div class='col' id='c99' onclick='blink("#c99")' style='background-color: white' >99</div>
+    <div class='col' id='c100' onclick='blink("#c100")' style='background-color: orange' >100</div>
+    </div>
+   </div>
+
+   <br>
+   <h1 style="font-size: 50px;float: left;color: aliceblue;font-weight: bolder;margin-left: 5%;">Madhu</h1>
+   <br><br>
+   <br>
+   <div class="health-plate">
+<div class="flx">
+    <div class="plate1">
+        <div class="health1">
+
+        </div>
+    </div>
+    <div style="margin-left: 5%;width: 30%;">
+        <img src="/static/avatars/16.png" width="100%" height="100%">
+    </div>
+</div>
+    </div>
+
+    <div class="loading">
+        <div class="load">
+            <div class="loader"></div>
+            <center><br><br><br>
+            <progress class="lbar" id="lbar" value="0" max="10">
+            </progress>
+            <h1 style="font-size: 70px;color: whitesmoke;text-align: center;">Please wait..!</h1>
+            
+        </center>
+            <img style="margin-top: 20%;margin-left: 5%;border-radius: 30px;" width="90%" height="60%" src="/static/images/load.gif">
+        </div>
+        
+    </div>
+
+    <script>
+
+var hit = document.getElementById('hit')
+var take = document.getElementById('take')
+
+
+var set = setInterval(
+            function(){
+                var val = document.getElementById('lbar').value
+                if (val == 10){
+                    clearInterval(set)
+                    $('h1').show(100)
+                    $('.plate').show(200)
+                    $('.loading').hide(200)
+                    $('.health-plate').show(200)
+                }
+                val = String(val+1)
+                $('#lbar').val(val)
+            },980
+        )
+        setTimeout(function(){
+            $('.load').hide(100)
+        },10000)
+
+
+$('h1').hide()
+$('.plate').hide()
+$('.health-plate').hide()
+
+
+
+
+$('.win').hide()
+$('.lose').hide()
+    //main vars  ...
+    var current_piece = ''
+    var current_pos = ''
+
+
+
+        function id_to_reverse_id(id){
+            var id_cell = Number(id.replace('#c',''))
+            var reverse_Cell = 101 - id_cell  
+            var reverse_id = num_to_id(reverse_Cell)
+            return reverse_id
+        }
+        function num_to_id(num){
+            return "#c"+String(num)
+        }
+
+        function id_to_num(id){
+            return Number(id.replace('#c',''))
+        }
+
+        function surrounds(id){
+            // var img = $(id).css('background-image')
+            // var pos = img.search('nade.png')
+            // if(pos != -1){
+            if(2 == -1){
+                surround_data = {
+                    up:true,
+                    down:true,
+                    left:true,
+                    right:true,
+                    left_up:true,
+                    left_down:true,
+                    right_up:true,
+                    right_down:true
+                }
+                console.log(surround_data)
+            }
+            else{
+                cell = id_to_num(id)
+                //up
+                if(cell != 1 && cell != 2 && cell != 3 && cell != 4 && cell != 5 && cell != 6 && cell != 7 && cell != 8 && cell != 9 && cell != 10){
+                    var temp_id = num_to_id(cell-10)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var up = false
+                    }
+                    else{
+                        var up = true
+                    }
+
+                }                
+                else{
+                    var up = false 
+                }
+
+                //down
+                if(cell != 91 && cell != 92 && cell != 93 && cell != 94 && cell != 95 && cell != 96 && cell != 97 && cell != 98 && cell != 99 && cell != 100){
+                    var temp_id = num_to_id(cell+10)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var down = false
+                    }
+                    else{
+                        var down = true
+                    }
+                    
+                }                
+                else{
+                    var down = false   
+                }
+                
+                //left
+                if(cell != 1 && cell != 11 && cell != 21 && cell != 31 && cell != 41 && cell != 51 && cell != 61 && cell != 71 && cell != 81 && cell != 91){
+                    var temp_id = num_to_id(cell-1)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var left = false
+                    }
+                    else{
+                        var left = true
+                    }
+
+                    
+                }                
+                else{
+                    var left = false
+                }
+
+                //right
+                if(cell != 10 && cell != 20 && cell != 30 && cell != 40 && cell != 50 && cell != 60 && cell != 70 && cell != 80 && cell != 90 && cell != 100){
+                    var temp_id = num_to_id(cell+1)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    
+                    if (pos != -1){
+                        var right = false
+                    }
+                    else{
+                        var right = true
+                    }
+
+                    
+                }                
+                else{
+                    var right = false
+                }
+                
+                
+                //left_up
+                if(cell != 1 && cell != 2 && cell != 3 && cell != 4 && cell != 5 && cell != 6 && cell != 7 && cell != 8 && cell != 9 && cell != 10 && cell != 11 && cell != 21 && cell != 31 && cell != 41 && cell != 51 && cell != 61 && cell != 71 && cell != 81 && cell != 91){
+                    var temp_id = num_to_id(cell-11)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var left_up = false
+                    }
+                    else{
+                        var left_up = true
+                    }
+
+                    
+                }                
+                else{
+                    var left_up = false   
+                }
+             
+                
+                //right_up
+                if(cell != 1 && cell != 2 && cell != 3 && cell != 4 && cell != 5 && cell != 6 && cell != 7 && cell != 8 && cell != 9 && cell != 10 && cell != 20 && cell != 20 && cell != 30 && cell != 40 && cell != 50 && cell != 60 && cell != 70 && cell != 80 && cell != 90 && cell != 100){
+                    var temp_id = num_to_id(cell-9)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var right_up = false
+                    }
+                    else{
+                        var right_up = true
+                    }
+
+                    
+                }                
+                else{
+                    var right_up = false 
+                }
+
+                //left_down
+                if(cell != 1 && cell != 11 && cell != 21 && cell != 31 && cell != 41 && cell != 51 && cell != 61 && cell != 71 && cell != 81 && cell != 91 && cell != 92 && cell != 93 && cell != 94 && cell != 95 && cell != 96 && cell != 97 && cell != 98 && cell != 99 && cell != 100){
+                    var temp_id = num_to_id(cell+9)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var left_down = false
+                    }
+                    else{
+                        var left_down = true
+                    }
+
+                    
+                }                
+                else{
+                    var left_down = false
+                }
+
+                //right_down
+                if(cell != 10 && cell != 20 && cell != 30 && cell != 40 && cell != 50 && cell != 60 && cell != 70 && cell != 80 && cell != 90 && cell != 100 && cell != 91 && cell != 92 && cell != 93 && cell != 94 && cell != 95 && cell != 96 && cell != 97 && cell != 98 && cell != 99){
+                    var temp_id = num_to_id(cell+11)
+                    var img = $(temp_id).css('background-image')
+                    var pos = img.search('blue')
+                    if (pos != -1){
+                        var right_down = false
+                    }
+                    else{
+                        var right_down = true
+                    }
+
+                    
+                }                
+                else{
+                    var right_down = false   
+                }
+                    
+                surround_data = {
+                    up:up,
+                    down:down,
+                    left:left,
+                    right:right,
+                    left_up:left_up,
+                    left_down:left_down,
+                    right_up:right_up,
+                    right_down:right_down
+                }
+            }
+            return surround_data
+        }
+
+
+        function blink(id){
+            var main_id = id
+            var img = $(id).css('background-image')
+            var pos = img.search('blue')
+            if ($(id).css('border-color') != 'rgb(0, 0, 0)'){
+                if($(id).css('border-color') == 'rgb(255, 0, 0)'){
+                    kill(id)
+                    hit.play()
+                    if (img.search('m4.png') != -1){
+                        dec_health(28)
+                    }
+                    else if(img.search('m24') != -1){
+                        dec_health(30)
+                        
+                    } 
+                    else if(img.search('akm') != -1){
+                        dec_health(25)
+
+                    } 
+                    else if(img.search('awm.png') != -1){
+                        dec_health(35)
+
+                    } 
+                    else if(img.search('nade') != -1){
+                        dec_health(30)
+
+                    } 
+                    else if(img.search('kar') != -1){
+                        dec_health(27)
+
+                    } 
+                    else if(img.search('shot') != -1){
+                        dec_health(15)
+
+                    } 
+                    console.log('killed')
+                    $(id).css('background-image',current_piece)
+                    $(current_pos).css('background-image','none')
+                    set_old_to_new(current_pos,id)
+                    $(".col").css('border','5px solid black')
+                    
+                    
+
+
+
+
+                }
+                else if($(id).css('border-color') == 'rgb(0, 0, 255)'){
+                    take.play()
+                    console.log('moved...')
+                    $(id).css('background-image',current_piece)
+                    $(current_pos).css('background-image','none')
+                    set_old_to_new(current_pos,id)
+                    $(".col").css('border','5px solid black')
+
+                    // set_poses()
+                }
+            }
+            else if(pos != -1){
+                take.play()
+                $(id).css('border','7px solid green')
+                var s_data = surrounds(id)
+                $.ajax({
+                    url:'/game/blinks/',
+                    data:{
+                        id:id,
+                        img:img,
+                        surround_cells:JSON.stringify(s_data)
+                    },
+                    success:function(res){
+                        console.log(res);
+                        $(".col").css('border','5px solid black')
+                        for(let i in res){
+                            for (let j in res[i]){
+                                var id = "#c"+String(res[i][j])
+                                img = $(id).css('background-image')
+                                pos = img.search('red')
+                                if(pos == -1){
+                                    var pos2 = img.search('blue')
+                                    if (pos2 == -1){
+                                        $(id).css('border','5px solid blue')
+                                    }
+                                    else{
+                                        break
+                                    }
+                                } 
+                                else{
+                                    $(id).css('border','5px solid red')
+                                    break
+                                }
+                            }
+                        }
+
+                        current_pos = main_id
+                        current_piece = $(main_id).css('background-image')
+                        
+                    },
+                        error:function(err){
+                            console.log(err);
+                        }
+
+                })
+            }
+
+        }
+
+
+// poses vars //////////////////////////////////////////////////////////////
+
+
+var kar = '#c91'
+var kar2='#c100'
+var nade ='#c92'
+var nade2='#c99'
+var m24 = '#c93'
+var m242 ='#c98'
+var akm = '#c94'
+var akm2 ='#c97'
+var awm = '#c95'
+var m416 ='#c96'
+var shot1='#c81'
+var shot2='#c82'
+var shot3='#c83'
+var shot4='#c84'
+var shot5='#c85'
+var shot6='#c86'
+var shot7='#c87'
+var shot8='#c88'
+var shot9='#c89'
+var shot10='#c90'
+
+var opnt_kar = '#c91'
+var opnt_kar2='#c100'
+var opnt_nade ='#c92'
+var opnt_nade2='#c99'
+var opnt_m24 = '#c93'
+var opnt_m242 ='#c98'
+var opnt_akm = '#c94'
+var opnt_akm2 ='#c97'
+var opnt_awm = '#c95'
+var opnt_m416 ='#c96'
+var opnt_shot1='#c81'
+var opnt_shot2='#c82'
+var opnt_shot3='#c83'
+var opnt_shot4='#c84'
+var opnt_shot5='#c85'
+var opnt_shot6='#c86'
+var opnt_shot7='#c87'
+var opnt_shot8='#c88'
+var opnt_shot9='#c89'
+var opnt_shot10='#c90'
+
+// function set_new_pos(old_id,new_id){
+//     var poses = [kar,kar2,nade,nade2,m24,m242,akm,akm2,awm,m416,shot1,shot2,shot3,shot4,shot5,shot6,shot7,shot8,shot9,shot10]
+
+//     for(let pos in poses){
+//         if(poses[pos] == old_id){
+//             poses[pos] = new_id
+//             break
+//         } 
+//     }
+//     console.log(poses)
+
+// }
+
+
+
+function get_backend_poses(){
+    
+    $.ajax({
+        url:'/game/get_poses',
+        success:function(res){
+            // console.log(res);
+            window.kar = res['kar']
+            window.kar2 = res['kar2']
+            window.nade = res['nade']
+            window.nade2 = res['nade2']
+            window.m24 = res['m24']
+            window.m242 = res['m242']
+            window.akm = res['akm']
+            window.akm2 = res['akm2']
+            window.awm = res['awm']
+            window.m416 = res['m416']
+            window.shot1 = res['shot1']
+            window.shot2 = res['shot2']
+            window.shot3 = res['shot3']
+            window.shot4 = res['shot4']
+            window.shot5 = res['shot5']
+            window.shot6 = res['shot6']
+            window.shot7 = res['shot7']
+            window.shot8 = res['shot8']
+            window.shot9 = res['shot9']
+            window.shot10 = res['shot10']
+            set_poses()
+
+        }
+    })
+    
+}
+function set_poses(){
+    $(window.kar).css('background-image',"url({% static 'new/blue/kar.png' %})")
+    $(window.kar2).css('background-image',"url({% static 'new/blue/kar.png' %})")
+
+    $(window.nade).css('background-image',"url({% static 'new/blue/nade.png' %})")
+    $(window.nade2).css('background-image',"url({% static 'new/blue/nade.png' %})")
+
+    $(window.m24).css('background-image',"url({% static 'new/blue/m24.png' %})")
+    $(window.m242).css('background-image',"url({% static 'new/blue/m24.png' %})")
+
+    $(window.akm).css('background-image',"url({% static 'new/blue/akm.png' %})")
+    $(window.akm2).css('background-image',"url({% static 'new/blue/akm.png' %})")
+
+    $(window.awm).css('background-image',"url({% static 'new/blue/awm.png' %})")
+    $(window.m416).css('background-image',"url({% static 'new/blue/m4.png' %})")
+
+    $(window.shot1).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot2).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot3).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot4).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot5).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot6).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot7).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot8).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot9).css('background-image',"url({% static 'new/blue/shot.png' %})")
+    $(window.shot10).css('background-image',"url({% static 'new/blue/shot.png' %})")
+}
+
+
+
+function get_opponent_backend_poses(){
+    
+    $.ajax({
+        url:'/game/get_opnt_poses',
+        success:function(res){
+            window.opnt_kar = res['kar']
+            window.opnt_kar2 = res['kar2']
+            window.opnt_nade = res['nade']
+            window.opnt_nade2 = res['nade2']
+            window.opnt_m24 = res['m24']
+            window.opnt_m242 = res['m242']
+            window.opnt_akm = res['akm']
+            window.opnt_akm2 = res['akm2']
+            window.opnt_awm = res['awm']
+            window.opnt_m416 = res['m416']
+            window.opnt_shot1 = res['shot1']
+            window.opnt_shot2 = res['shot2']
+            window.opnt_shot3 = res['shot3']
+            window.opnt_shot4 = res['shot4']
+            window.opnt_shot5 = res['shot5']
+            window.opnt_shot6 = res['shot6']
+            window.opnt_shot7 = res['shot7']
+            window.opnt_shot8 = res['shot8']
+            window.opnt_shot9 = res['shot9']
+            window.opnt_shot10 = res['shot10']
+            set_opnt_poses()
+
+        }
+    })
+    
+}
+
+function set_opnt_poses(){
+
+    $(window.opnt_kar).css('background-image',"url({% static 'new/red/kar.png' %})")
+    $(window.opnt_kar2).css('background-image',"url({% static 'new/red/kar.png' %})")
+    $(window.opnt_nade).css('background-image',"url({% static 'new/red/nade.png' %})")
+    $(window.opnt_nade2).css('background-image',"url({% static 'new/red/nade.png' %})")
+    $(window.opnt_m24).css('background-image',"url({% static 'new/red/m24.png' %})")
+    $(window.opnt_m242).css('background-image',"url({% static 'new/red/m24.png' %})")
+    $(window.opnt_akm).css('background-image',"url({% static 'new/red/akm.png' %})")
+    $(window.opnt_akm2).css('background-image',"url({% static 'new/red/akm.png' %})")
+    $(window.opnt_awm).css('background-image',"url({% static 'new/red/awm.png' %})")
+    $(window.opnt_m416).css('background-image',"url({% static 'new/red/m4.png' %})")
+    $(window.opnt_shot1).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot2).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot3).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot4).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot5).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot6).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot7).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot8).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot9).css('background-image',"url({% static 'new/red/shot.png' %})")
+    $(window.opnt_shot10).css('background-image',"url({% static 'new/red/shot.png' %})")
+}
+
+
+setInterval(function(){
+    get_opponent_backend_poses()    
+},500)
+
+
+setInterval(function(){
+    $.ajax({
+        url:'/game/make_none',
+        success:function(res){
+            for(let id in res.data){
+                $(res.data[id]).css('background-image','none')
+            }
+            
+        }
+    })
+},500)
+
+
+function set_old_to_new(old_id,new_id){
+    
+    if(window.kar == old_id){
+        window.kar = new_id
+    }
+    else if(window.kar2 == old_id){
+        window.kar2 = new_id
+    }
+    else if(window.nade == old_id){
+        window.nade = new_id
+    }
+    else if(window.nade2 == old_id){
+        window.nade2 = new_id
+    }
+    else if(window.akm == old_id){
+        window.akm = new_id
+    }
+    else if(window.akm2 == old_id){
+        window.akm2 = new_id
+    }
+    else if(window.m24 == old_id){
+        window.m24 = new_id
+    }
+    else if(window.m242 == old_id){
+        window.m242 = new_id
+    }
+    else if(window.m416 == old_id){
+        window.m416 = new_id
+    }
+    else if(window.awm == old_id){
+        window.awm = new_id
+    }
+    else if(window.shot1 == old_id){
+        window.shot1 = new_id
+    }
+    else if(window.shot2 == old_id){
+        window.shot2 = new_id
+    }
+    else if(window.shot3 == old_id){
+        window.shot3 = new_id
+    }
+    else if(window.shot4 == old_id){
+        window.shot4 = new_id
+    }
+    else if(window.shot5 == old_id){
+        window.shot5 = new_id
+    }
+    else if(window.shot6 == old_id){
+        window.shot6 = new_id
+    }
+    else if(window.shot7 == old_id){
+        window.shot7 = new_id
+    }
+    else if(window.shot8 == old_id){
+        window.shot8 = new_id
+    }
+    else if(window.shot9 == old_id){
+        window.shot9 = new_id
+    }
+    else if(window.shot10 == old_id){
+        window.shot10 = new_id
+    }
+    
+    $.ajax({
+        url:'/game/set_poses/',
+        data:{
+            kar :  window.kar,
+            kar2 : window.kar2,
+            nade : window.nade,
+            nade2 :window.nade2,
+            m24 :  window.m24,
+            m242 : window.m242,
+            akm :  window.akm,
+            akm2 : window.akm2,
+            awm :  window.awm,
+            m416 : window.m416,
+            shot1: window.shot1,
+            shot2: window.shot2,
+            shot3: window.shot3,
+            shot4: window.shot4,
+            shot5: window.shot5,
+            shot6: window.shot6,
+            shot7: window.shot7,
+            shot8: window.shot8,
+            shot9: window.shot9,
+            shot10:window.shot10
+        }
+    })
+
+}
+
+
+
+
+
+
+get_backend_poses()
+
+
+function kill(id){
+    $.ajax({
+        url:'/game/kill/',
+        data:{
+            id:id_to_reverse_id(id)
+        },
+        success:function(res){
+            console.log(res)
+        }
+    })
+}
+
+
+setInterval(function(){
+    $.ajax({
+        url:'/game/inc_health',
+        success:function(res){
+            $('.health1').css('width',res.health)
+        }
+    })
+},50000)
+
+function dec_health(num){
+    var dec_num = Number(num) 
+    $.ajax({
+        url:'/game/dec_health',
+        data:{
+            num:dec_num
+        }
+    })
+}
+
+// dec_health(10)
+
+var h1 = 100
+var h2 = 100
+setInterval(function(){
+    $.ajax({
+        url:'/game/get_health',
+        success:function(res){
+            $('.health1').css('width',res.health1)
+            $('.health2').css('width',res.health2)
+            window.h1 = Number(res.health1.replace('%',''))
+            window.h2 = Number(res.health2.replace('%',''))
+        }
+    })
+},500)
+
+// 912.375px
+// awm-35
+// m4 - 28
+// akm 25
+// m24 - 30
+// kar - 27
+// nade - 30
+// shot - 15
+
+        //winning or losing
+
+    setInterval(function(){
+        if(window.h1 <= 0){
+            console.log('losseesseeseeese')
+            $('.plate').slideUp(500)
+            $('h1').slideUp(500)
+            $('.health-plate').hide(500)
+            $('.lose').show(700)
+        }
+        else if(window.h2 <= 0){
+            console.log('win win win')
+            $('.plate').slideUp(500)
+            $('h1').slideUp(500)
+            $('.health-plate').hide(500)
+            $('.win').show(700)
+
+        } 
+
+    },500)
+
+
+
+
+
+     </script>
+      </body>
+    
+    
+    </html>
